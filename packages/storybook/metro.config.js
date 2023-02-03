@@ -5,7 +5,7 @@ const { getMetroTools, getMetroAndroidAssetsResolutionFix } = require('react-nat
 const metroTools = getMetroTools();
 
 function getNohoistedPackages() {
-  const nohoist = ['**/react', '**/react-native', '**/react-native-web'];
+  const nohoist = ['**/react', '**/react-native', '**/react-native-web', '**/react-native-safe-area-context'];
   const nohoistedPackages = nohoist
     .filter(packageNameGlob => !packageNameGlob.endsWith('**'))
     .map(packageNameGlob => packageNameGlob.substring(3));

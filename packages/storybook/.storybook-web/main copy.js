@@ -21,7 +21,11 @@ const babelLoaderConfiguration = {
 const ttfLoaderConfiguration = {
   test: /\.ttf$/,
   loader: 'url-loader',
-  include: [path.resolve('../../packages/storybook/node_modules/react-native-vector-icons')],
+  include: [
+    path.resolve(appDirectory, '../node_modules/react-native-vector-icons'),
+    path.resolve(appDirectory, '../../app/node_modules/react-native-vector-icons'),
+    path.resolve(appDirectory, '../node_modules/react-native-vector-icons/Fonts'),
+  ],
 };
 
 const imageLoaderConfiguration = {
@@ -42,8 +46,7 @@ module.exports = {
     {
       name: '@storybook/addon-react-native-web',
       options: {
-        modulesToTranspile: ['react-native-reanimated', 'react-native-vector-icons'],
-        babelPlugins: ['react-native-reanimated/plugin'],
+        modulesToTranspile: ['react-native-vector-icons'],
       },
     },
   ],
@@ -53,7 +56,12 @@ module.exports = {
       ...config.resolve.alias,
       'react-native-web': path.resolve('../../packages/storybook/node_modules/react-native-web'),
     };
-    config.module.rules = [...config.module.rules, babelLoaderConfiguration];
+    config.module.rules = [
+      ...config.module.rules,
+      babelLoaderConfiguration,
+      ttfLoaderConfiguration,
+      imageLoaderConfiguration,
+    ];
     return config;
   },
 };
