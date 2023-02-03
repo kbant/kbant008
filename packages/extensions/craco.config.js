@@ -64,7 +64,10 @@ module.exports = {
     {
       plugin: require('craco-babel-loader'),
       options: {
-        includes: [resolveApp('../../node_modules/@react-native-async-storage/async-storage')],
+        includes: [
+          resolveApp('../../node_modules/react-native-vector-icons'),
+          resolveApp('../../node_modules/@react-native-async-storage/async-storage'),
+        ],
       },
     },
   ],

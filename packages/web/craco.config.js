@@ -10,28 +10,18 @@ const currentWorkspace = 'web';
 // craco babel loader
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
+
 module.exports = {
   webpack: {
     alias: {
       react: `${monorepoRoot}/packages/${currentWorkspace}/node_modules/react`,
       'react-native': `${monorepoRoot}/packages/${currentWorkspace}/node_modules/react-native-web`,
-      // '@react-native-async-storage/async-storage': `${monorepoRoot}/packages/${currentWorkspace}/node_modules/@react-native-async-storage/async-storage`,
     },
     configure: webpackConfig => {
       webpackConfig.externals = {
         ...webpackConfig.externals,
       };
-      webpackConfig.resolve.alias = {
-        ...webpackConfig.resolve.alias,
-      };
-      webpackConfig.module.rules = [
-        ...webpackConfig.module.rules,
-        {
-          test: /\.ttf$/,
-          loader: 'url-loader',
-          include: path.resolve(monorepoRoot, 'node_modules', 'react-native-vector-icons'),
-        },
-      ];
+      webpackConfig.module.rules = [...webpackConfig.module.rules];
 
       // Allow importing from external workspaces.
       webpackTools.enableWorkspacesResolution(webpackConfig);
@@ -52,13 +42,16 @@ module.exports = {
   },
   babel: {
     presets: ['@babel/preset-react'],
-    plugins: [],
+    plugins: ['@babel/plugin-proposal-export-namespace-from', 'react-native-reanimated/plugin'],
   },
   plugins: [
     {
       plugin: require('craco-babel-loader'),
       options: {
-        includes: [resolveApp('../../node_modules/@react-native-async-storage/async-storage')],
+        includes: [
+          resolveApp('../../node_modules/react-native-vector-icons'),
+          resolveApp('../../node_modules/@react-native-async-storage/async-storage'),
+        ],
       },
     },
   ],

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Image, ImageSourcePropType, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { AnimatedCard } from './components/Paper/AnimatedCard';
 import { AsyncStorageExample } from './AsyncStorageExample';
+import { Button } from './components/Button/Button';
 import { subplatform } from './config';
 import LogoSrc from './logo.png';
 
@@ -18,6 +20,8 @@ export function App(): JSX.Element {
           <Text style={styles.platformValue}>{platformValue}</Text>
         </View>
       </View>
+      <Button text="Hello World" color="blue" textColor="white" />
+      <AnimatedCard title="Title01" content="Hello Animated World" />
       <AsyncStorageExample />
     </SafeAreaView>
   );

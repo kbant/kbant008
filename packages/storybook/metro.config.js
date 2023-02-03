@@ -32,12 +32,6 @@ const nohoistSettings = getMetroNohoistSettings({
   workspaceName: 'storybook',
 });
 
-console.log(metroTools.blockList);
-console.log(metroTools.extraNodeModules);
-
-console.log(nohoistSettings.blockList);
-console.log(nohoistSettings.extraNodeModules);
-
 const androidAssetsResolutionFix = getMetroAndroidAssetsResolutionFix();
 
 module.exports = {

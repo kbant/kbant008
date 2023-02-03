@@ -53,7 +53,7 @@ module.exports = {
       ...config.resolve.alias,
       'react-native-web': path.resolve('../../packages/storybook/node_modules/react-native-web'),
     };
-    config.module.rules = [...config.module.rules, babelLoaderConfiguration];
+    config.module.rules = [...config.module.rules, babelLoaderConfiguration, ttfLoaderConfiguration];
     return config;
   },
 };

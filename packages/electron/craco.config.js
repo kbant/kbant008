@@ -1,11 +1,17 @@
 const webpack = require('webpack');
 const path = require('path');
+const fs = require('fs');
 const { getWebpackTools, getMonorepoRoot } = require('react-native-monorepo-tools');
 
 const webpackTools = getWebpackTools();
 const monorepoRoot = getMonorepoRoot();
 
 const currentWorkspace = 'electron';
+
+// craco babel loader
+const appDirectory = fs.realpathSync(process.cwd());
+const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
+
 module.exports = {
   webpack: {
     alias: {
@@ -60,4 +66,12 @@ module.exports = {
   typescript: {
     enableTypeChecking: true,
   },
+  plugins: [
+    {
+      plugin: require('craco-babel-loader'),
+      options: {
+        includes: [resolveApp('../../node_modules/react-native-vector-icons')],
+      },
+    },
+  ],
 };
